@@ -1,6 +1,5 @@
 const db = require('../config/db');
 
-// 1. GET – Retrieve all records
 exports.getAllStudents = async (req, res) => {
     try {
         const [rows] = await db.query('SELECT * FROM students');
@@ -10,7 +9,6 @@ exports.getAllStudents = async (req, res) => {
     }
 };
 
-// 2. GET (by ID) – Retrieve a specific record
 exports.getStudentById = async (req, res) => {
     try {
         const [rows] = await db.query('SELECT * FROM students WHERE id = ?', [req.params.id]);
@@ -21,7 +19,6 @@ exports.getStudentById = async (req, res) => {
     }
 };
 
-// 3. POST – Insert a new record
 exports.createStudent = async (req, res) => {
     const { firstName, lastName, age, course } = req.body;
     try {
@@ -33,7 +30,6 @@ exports.createStudent = async (req, res) => {
     }
 };
 
-// 4. PUT – Update a record (Full Update)
 exports.updateStudent = async (req, res) => {
     const { firstName, lastName, age, course } = req.body;
     try {
@@ -45,7 +41,6 @@ exports.updateStudent = async (req, res) => {
     }
 };
 
-// 5. PATCH – Update specific fields (Example: just the course)
 exports.patchStudent = async (req, res) => {
     const { course } = req.body;
     try {
@@ -56,7 +51,6 @@ exports.patchStudent = async (req, res) => {
     }
 };
 
-// 6. DELETE – Remove a record
 exports.deleteStudent = async (req, res) => {
     try {
         await db.query('DELETE FROM students WHERE id = ?', [req.params.id]);
